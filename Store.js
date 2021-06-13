@@ -1,14 +1,15 @@
-import {makeAutoObservable} from 'mobx';
+import { makeAutoObservable } from 'mobx'
 
 class Mine {
-  num = 1;
+  num = 1
+
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 
   increase = () => {
-    this.num += 1;
-  };
+    this.num += 1
+  }
 }
 
-export const store = new Mine();
+export const store = new Mine()
