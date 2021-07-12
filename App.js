@@ -4,14 +4,18 @@ import { observable, action, autorun, computed } from 'mobx'
 import { inject, observer, useLocalStore } from 'mobx-react'
 
 import BottomSheet from './src/screens/BottomSheet/BoTtomSheet'
-import HeadPhoneSlider from './src/screens/HeadPhoneSlider'
+import HeadPhoneSliderAnimated from './src/screens/HeadPhoneSlider/HeadPhoneSliderAnimated'
+import HeadPhoneSliderRe_Animated from './src/screens/HeadPhoneSlider/HeadPhoneSliderRe_Animated'
+import MiniSlider from './src/screens/MiniSlider/MiniSlider'
 
 LogBox.ignoreAllLogs()
 
 const App = props => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <HeadPhoneSlider />
+      {/* <HeadPhoneSliderAnimated /> */}
+      <HeadPhoneSliderRe_Animated />
+      {/* <MiniSlider /> */}
     </View>
   )
 }

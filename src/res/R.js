@@ -1,18 +1,18 @@
 import strings from './strings'
-// import images from './images';
+import images from './images'
 import colors from './colors'
-// import dimensions from './dimensions';
-// import numbers from './numbers';
-// import fontSizes from './fontSizes';
+// import dimensions from './dimensions'
+import numbers from './numbers'
+// import fontSizes from './fontSizes'
 import fonts from './fonts'
-// import styles from './styles';
+// import styles from './styles'
 
 const R = {
   strings,
-  // images,
+  images,
   colors,
   // dimensions,
-  // numbers,
+  numbers,
   // fontSizes,
   fonts,
   // styles,
