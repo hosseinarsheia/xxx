@@ -1,13 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 import { View, Button, StyleSheet, useWindowDimensions } from 'react-native'
 import { observer } from 'mobx-react'
 
-import Animated, { useSharedValue, useAnimatedStyle, withSpring, useAnimatedGestureHandler } from 'react-native-reanimated'
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  useAnimatedGestureHandler,
+  withTiming,
+} from 'react-native-reanimated'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 
-const BootomSheet = () => {
+const BottomSheet = () => {
   const windowHeight = useWindowDimensions().height
-  const Mytop = useSharedValue(windowHeight)
+  const Mytop = useRef(useSharedValue(windowHeight)).current
 
   const eventHandler = useAnimatedGestureHandler({
     onStart: (event, ctx) => (ctx.initialHeight = Mytop.value),
@@ -22,7 +28,10 @@ const BootomSheet = () => {
     return { top: withSpring(Mytop.value) }
   })
 
-  const openBottomSheet = () => (Mytop.value = windowHeight / 2)
+  const openBottomSheet = () => {
+    'worklet'
+    Mytop.value = windowHeight / 2
+  }
 
   return (
     <Fragment>
@@ -33,7 +42,7 @@ const BootomSheet = () => {
     </Fragment>
   )
 }
-export default observer(BootomSheet)
+export default observer(BottomSheet)
 
 export const styles = StyleSheet.create({
   container: {

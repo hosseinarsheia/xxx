@@ -1,3 +1,4 @@
+import { useRef, createRef } from 'react'
 export const PRODUCT_LIST = [
   {
     title: 'MDR-XB550AP',
@@ -8,6 +9,7 @@ export const PRODUCT_LIST = [
     id: '1',
     url: require('../images/Headphones/1.png'),
     brand: 'Sony',
+    ref: createRef(),
   },
   {
     title: 'WH-CH710N',
@@ -18,6 +20,7 @@ export const PRODUCT_LIST = [
     id: '2',
     url: require('../images/Headphones/2.png'),
     brand: 'Razer',
+    ref: createRef(),
   },
   {
     title: 'WH-1000XM3',
@@ -28,6 +31,7 @@ export const PRODUCT_LIST = [
     id: '3',
     url: require('../images/Headphones/3.png'),
     brand: 'Panasonic',
+    ref: createRef(),
   },
   {
     title: 'WH-XB900N',
@@ -38,5 +42,6 @@ export const PRODUCT_LIST = [
     id: '4',
     url: require('../images/Headphones/4.png'),
     brand: 'Beats',
+    ref: createRef(),
   },
 ]
