@@ -9,19 +9,27 @@ import HeadPhoneSliderRe_Animated from './src/screens/HeadPhoneSlider/HeadPhoneS
 import AnimatedTab from './src/screens/AnimatedTab/AnimatedTab'
 import LinearProgressBar from './src/screens/LinearProgressBar/LinearProgressBar'
 import LinearProgressBarReanimated from './src/screens/LinearProgressBar/LinearProgressBarReanimated'
+import SliderSquareBackground from './src/screens/SliderSquareBackground/SliderSquareBackground'
+import SliderSquareBackgroundReAnimated from './src/screens/SliderSquareBackground/SliderSquareBackgroundReAnimated'
+import Timer from './src/screens/Timer/Timer'
 
 LogBox.ignoreAllLogs()
 
 const App = props => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <BottomSheet />
+      {/* <BottomSheet /> */}
 
       {/* <HeadPhoneSliderAnimated /> */}
       {/* <HeadPhoneSliderRe_Animated /> */}
 
       {/* <LinearProgressBar /> */}
       {/* <LinearProgressBarReanimated /> */}
+
+      {/* <SliderSquareBackground /> */}
+      {/* <SliderSquareBackgroundReAnimated /> */}
+
+      <Timer />
     </View>
   )
 }

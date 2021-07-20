@@ -30,7 +30,7 @@ const Progress = ({ step, steps, height }) => {
   return (
     <View>
       <View onLayout={e => setNewWidth(e.nativeEvent.layout.width)} style={styles.progreesContainer}>
-        <Animated.View style={[styles.progressStyle, { transform: [{ translateX: animatedValue }] }]}></Animated.View>
+        <Animated.View style={[styles.progressStyle, { transform: [{ translateX: animatedValue }] }]} />
       </View>
     </View>
   )
@@ -38,7 +38,7 @@ const Progress = ({ step, steps, height }) => {
 
 const LinearProgressBar = props => {
   const [step, SetStep] = useState(0)
-  const steps = 10
+  const steps = 100
 
   changeStep = () => {
     if (step >= steps) return
