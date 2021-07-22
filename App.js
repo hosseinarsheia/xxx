@@ -12,6 +12,8 @@ import LinearProgressBarReanimated from './src/screens/LinearProgressBar/LinearP
 import SliderSquareBackground from './src/screens/SliderSquareBackground/SliderSquareBackground'
 import SliderSquareBackgroundReAnimated from './src/screens/SliderSquareBackground/SliderSquareBackgroundReAnimated'
 import Timer from './src/screens/Timer/Timer'
+import TimerReanimated from './src/screens/Timer/TimerReanimated'
+import ZaraApp from './src/screens/ZaraApp/ZaraApp'
 
 LogBox.ignoreAllLogs()
 
@@ -30,6 +32,9 @@ const App = props => {
       {/* <SliderSquareBackgroundReAnimated /> */}
 
       <Timer />
+      {/* <TimerReanimated /> */}
+
+      {/* <ZaraApp /> */}
     </View>
   )
 }
