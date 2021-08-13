@@ -13,6 +13,7 @@ import { PanGestureHandler } from 'react-native-gesture-handler'
 
 const BottomSheet = () => {
   const windowHeight = useWindowDimensions().height
+  const windowWidth = useWindowDimensions().width
   const Mytop = useRef(useSharedValue(windowHeight)).current
 
   const eventHandler = useAnimatedGestureHandler({
@@ -34,12 +35,23 @@ const BottomSheet = () => {
   }
 
   return (
-    <Fragment>
-      <Button title="press me" onPress={openBottomSheet} />
+    <View style={{ flex: 1 }}>
       <PanGestureHandler onGestureEvent={eventHandler}>
         <Animated.View style={[styles.bottomSheet, TOP]} />
       </PanGestureHandler>
-    </Fragment>
+      <View
+        style={{
+          flex: 1,
+          width: windowWidth,
+          height: windowHeight,
+          position: 'absolute',
+          zIndex: 2,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Button title="Activate BottomSheet" onPress={openBottomSheet} />
+      </View>
+    </View>
   )
 }
 export default observer(BottomSheet)
@@ -58,7 +70,7 @@ export const styles = StyleSheet.create({
     bottom: 0,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    zIndex: 100,
+    zIndex: 1,
     height: 2000,
   },
 })

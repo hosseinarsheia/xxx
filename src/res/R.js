@@ -1,21 +1,21 @@
 import strings from './strings'
 import images from './images'
 import colors from './colors'
-// import dimensions from './dimensions'
+import dimensions from './dimensions'
 import numbers from './numbers'
-// import fontSizes from './fontSizes'
+import fontSizes from './fontSizes'
 import fonts from './fonts'
-// import styles from './styles'
+import styles from './styles'
 
 const R = {
   strings,
   images,
   colors,
-  // dimensions,
+  dimensions,
   numbers,
-  // fontSizes,
+  fontSizes,
   fonts,
-  // styles,
+  styles,
 }
 
 const getString = (text, ...params) => {
