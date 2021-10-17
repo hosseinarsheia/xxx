@@ -7,10 +7,14 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { enableScreens } from 'react-native-screens'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
+import { Provider } from 'react-redux'
+import { store } from './src/ReduXStore/store'
+
 import TextAnimationScreen from './src/screens/1_TextAnimationScreen'
 import BirthdaySliderScreen from './src/screens/2_BirthdaySliderScreen'
 
 import Onboarding1 from './src/screens/UIScreens/Apart/screens/Onboarding1'
+import Redux from './src/screens/Redux'
 
 // import BottomSheet from './src/screens/BottomSheet/BottomSheet'
 // import HeadPhoneSliderAnimated from './src/screens/HeadPhoneSlider/HeadPhoneSliderAnimated'
@@ -111,16 +115,19 @@ const options = () => ({
 
 const App = props => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Onboarding1" headerMode="none">
-        {/* /********************************************************************* */}
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Redux" headerMode="none">
+          {/* /********************************************************************* */}
 
-        <Stack.Screen name="TextAnimationScreen" component={TextAnimationScreen} />
-        <Stack.Screen name="BirthdaySliderScreen" component={BirthdaySliderScreen} />
+          <Stack.Screen name="TextAnimationScreen" component={TextAnimationScreen} />
+          <Stack.Screen name="BirthdaySliderScreen" component={BirthdaySliderScreen} />
 
-        <Stack.Screen name="Onboarding1" component={Onboarding1} />
+          <Stack.Screen name="Onboarding1" component={Onboarding1} />
 
-        {/*   <Stack.Screen name="SharedElement" component={SharedElement} />
+          <Stack.Screen name="Redux" component={Redux} />
+
+          {/*   <Stack.Screen name="SharedElement" component={SharedElement} />
         <Stack.Screen
           name="SecondScreen"
           component={SecondScreen}
@@ -153,8 +160,9 @@ const App = props => {
         <Stack.Screen name={SCREENS.SliderSquareBackgroundReAnimated} component={SliderSquareBackgroundReAnimated} />
 
         <Stack.Screen name={SCREENS.StackCoursel} component={StackCoursel} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
