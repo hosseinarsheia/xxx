@@ -1,72 +1,9 @@
-// import React, { useEffect } from 'react'
-// import { View, Text, Alert, Button, TouchableOpacity } from 'react-native'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { decrement, increment, incrementByAmount } from '../../ReduXStore/counterSlice'
-
-// const MyButton = React.memo(({ title }) => {
-//   // const age = useSelector(
-//   //   state => state.counter.age,
-//   //   (prev, next) => prev === next,
-//   // )
-//   useEffect(() => {
-//     console.log('myButton mounted')
-
-//     return () => console.log('myButton UnMounted')
-//   })
-
-//   return (
-//     <TouchableOpacity style={{ width: 100, backgroundColor: 'tomato', marginVertical: 20, padding: 30 }}>
-//       <Text>{title}</Text>
-//     </TouchableOpacity>
-//   )
-// })
-
-// const MyRedux = props => {
-//   const num = useSelector(state => state.counter.num)
-//   const dispatch = useDispatch()
-
-//   useEffect(() => {
-//     console.log('MyRedux mounted')
-
-//     return () => console.log('MyRedux UnMounted')
-//   })
-
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Button title="increment" onPress={() => dispatch(increment())} />
-
-//       <View style={{ marginVertical: 20 }}></View>
-//       <Button title="decrement" onPress={() => dispatch(decrement())} />
-
-//       <View style={{ marginVertical: 20 }}></View>
-//       <Button title="incrementByAmount" onPress={() => dispatch(incrementByAmount(5))} />
-
-//       <MyButton title="hello" />
-
-//       <Text>{num}</Text>
-//     </View>
-//   )
-// }
-
-// export default MyRedux
-
-import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, Alert, StyleSheet, Button, Easing, Animated } from 'react-native'
-import { AnimatedCircularProgress } from 'react-native-circular-progress'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Alert, StyleSheet, Button } from 'react-native'
+import AnimatedCircularProgress from './AnimatedCircularProgress'
 
 const MyRedux = props => {
-  // const [progress, setProgress] = useState(0)
-
-  const myRef = useRef()
-  useEffect(() => {
-    animated(75)
-  }, [])
-
-  const animated = toValue => {
-    setTimeout(() => {
-      myRef.current.animate(toValue, 1000, Easing.in)
-    }, 1000)
-  }
+  const [progress, setProgress] = useState(100)
 
   const circles = progressValue => (
     <>
@@ -82,23 +19,24 @@ const MyRedux = props => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <AnimatedCircularProgress
-        ref={myRef}
         rotation={0}
         size={220}
         width={10}
-        fill={0}
-        // duration={1000}
-        tintColor="#004952"
-        // tintColorSecondary={'#004952'}
+        fill={progress}
+        firstColor="green"
+        secondColor="tomato"
+        // tintColor="blue"
+        // tintColorSecondary={'red'}
         dashedTint={{ width: 2, gap: 4 }}
         children={circles}
+        duration={1000}
       />
 
       <View style={{ marginTop: 20 }}>
-        <Button title="animated progress" onPress={() => animated(75)} />
+        <Button title="animated progress" onPress={() => setProgress(75)} />
       </View>
       <View style={{ marginTop: 20 }}>
-        <Button title="reset progress" onPress={() => animated(0)} />
+        <Button title="reset progress" onPress={() => setProgress(0)} />
       </View>
     </View>
   )

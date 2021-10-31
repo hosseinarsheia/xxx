@@ -25,7 +25,7 @@ import Redux from './src/screens/Redux'
 // import SliderSquareBackground from './src/screens/SliderSquareBackground/SliderSquareBackground'
 // import SliderSquareBackgroundReAnimated from './src/screens/SliderSquareBackground/SliderSquareBackgroundReAnimated'
 // import Timer from './src/screens/Timer/Timer'
-// import TimerReanimated from './src/screens/Timer/TimerReanimated'
+import TimerReanimated from './src/screens/Timer/TimerReanimated'
 // import ZaraApp from './src/screens/ZaraApp/ZaraApp'
 // import SharedElement from './src/screens/SharedElement'
 // import SecondScreen from './src/screens/SharedElement/SecondScreen'
@@ -125,7 +125,7 @@ const App = props => {
 
           <Stack.Screen name="Onboarding1" component={Onboarding1} />
 
-          <Stack.Screen name="Redux" component={Redux} />
+          <Stack.Screen name="TimerReanimated" component={TimerReanimated} />
 
           {/*   <Stack.Screen name="SharedElement" component={SharedElement} />
         <Stack.Screen

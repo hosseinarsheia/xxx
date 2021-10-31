@@ -1,76 +1,96 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, Alert, StyleSheet, Button } from 'react-native'
-import { AnimatedCircularProgress } from 'react-native-circular-progress'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Animated, Easing } from 'react-native'
+import CircularProgress from './CircularProgress'
+const AnimatedProgress = Animated.createAnimatedComponent(CircularProgress)
 
-const MyRedux = props => {
-  const [progress, setProgress] = useState(0)
+export default class AnimatedCircularProgress extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      fillAnimation: new Animated.Value(props.prefill),
+    }
+    if (props.onFillChange) {
+      this.state.fillAnimation.addListener(({ value }) => props.onFillChange(value))
+    }
+  }
 
-  const circles = progressValue => (
-    <>
-      <View style={styles.circlesContainer}>
-        <View style={styles.innerCircle} />
-        <View style={styles.outerCircle} />
-      </View>
+  componentDidMount() {
+    this.animate()
+  }
 
-      <Text style={styles.text}>{`Your Driving Score \n ${Math.floor(progressValue)} \n out of 100 \n Soaring Up ! `}</Text>
-    </>
-  )
+  componentDidUpdate(prevProps) {
+    if (prevProps.fill !== this.props.fill) {
+      this.animate()
+    }
+  }
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <AnimatedCircularProgress
-        rotation={0}
-        size={220}
-        width={10}
-        fill={progress}
-        tintColor="#004952"
-        // tintColorSecondary={'#004952'}
-        dashedTint={{ width: 2, gap: 4 }}
-        children={circles}
-        duration={1000}
+  reAnimate(prefill, toVal, dur, ease) {
+    this.setState(
+      {
+        fillAnimation: new Animated.Value(prefill),
+      },
+      () => this.animate(toVal, dur, ease),
+    )
+  }
+
+  animate(toVal, dur, ease) {
+    const toValue = toVal >= 0 ? toVal : this.props.fill
+    const duration = dur || this.props.duration
+    const easing = ease || this.props.easing
+    const useNativeDriver = this.props.useNativeDriver
+
+    const anim = Animated.timing(this.state.fillAnimation, {
+      useNativeDriver,
+      toValue,
+      easing,
+      duration,
+    })
+    anim.start(this.props.onAnimationComplete)
+
+    return anim
+  }
+
+  animateColor() {
+    if (!this.props.tintColorSecondary) {
+      return this.props.tintColor
+    }
+
+    const tintAnimation = this.state.fillAnimation.interpolate({
+      inputRange: [0, 100],
+      outputRange: [this.props.tintColor, this.props.tintColorSecondary],
+    })
+
+    return tintAnimation
+  }
+
+  render() {
+    const { fill, prefill, ...other } = this.props
+
+    return (
+      <AnimatedProgress
+        {...other}
+        fill={this.state.fillAnimation}
+        tintColor={this.animateColor()}
+        firstColor={this.props.firstColor}
+        secondColor={this.props.secondColor}
       />
-
-      <View style={{ marginTop: 20 }}>
-        <Button title="animated progress" onPress={() => setProgress(75)} />
-      </View>
-      <View style={{ marginTop: 20 }}>
-        <Button title="reset progress" onPress={() => setProgress(0)} />
-      </View>
-    </View>
-  )
+    )
+  }
 }
 
-export default MyRedux
+AnimatedCircularProgress.propTypes = {
+  ...CircularProgress.propTypes,
+  prefill: PropTypes.number,
+  duration: PropTypes.number,
+  easing: PropTypes.func,
+  onAnimationComplete: PropTypes.func,
+  useNativeDriver: PropTypes.bool,
+}
 
-export const styles = StyleSheet.create({
-  circlesContainer: {
-    flex: 1,
-    width: '100%',
-    padding: 10,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  innerCircle: {
-    height: '80%',
-    width: '80%',
-    backgroundColor: '#004952',
-    position: 'absolute',
-    borderRadius: 100,
-  },
-  outerCircle: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#99D8D6',
-    borderRadius: 100,
-    position: 'absolute',
-    zIndex: -1,
-  },
-  text: {
-    position: 'absolute',
-    color: 'white',
-    zIndex: 10,
-    textAlign: 'center',
-  },
-})
+AnimatedCircularProgress.defaultProps = {
+  duration: 500,
+  easing: Easing.out(Easing.ease),
+  prefill: 0,
+  useNativeDriver: false,
+}
